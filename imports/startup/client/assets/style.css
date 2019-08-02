@@ -1,0 +1,36 @@
+header{
+    transition: 0.2s;
+}
+
+main{
+    transition: 0.2s;
+}
+
+html{
+    font-family: roboto, sans-serif;
+    min-width: 320px;
+}
+
+*{
+    outline: none;
+}   
+
+body{
+    margin: 0;
+}
+
+p{
+    margin: 0;
+}
+
+.mainContainer{
+    min-height: 100vh;
+}
+
+.mainContainerHome {
+    margin-top: -120px;
+  }
+  
+.mainContent {
+    margin-top: 75px;
+}
