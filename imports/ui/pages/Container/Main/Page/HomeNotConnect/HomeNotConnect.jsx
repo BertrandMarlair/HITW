@@ -10,9 +10,15 @@ import GriddedDiv from './components/WidjetTypes/GriddedDiv'
 import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
-import Maps from './components/Widget/Maps/maps'
-import Test from './components/Widget/Test/test'
+import compose from 'recompose/compose';
+import { withTracker } from 'meteor/react-meteor-data';
+import { Maps } from '../../../../../../api/MapsCollection';
+
+import MapsComp from './components/Widget/Maps/maps'
+import ChartBar from './components/Widget/ChartBar/ChartBar'
 import Chart from './components/Widget/Chart/Chart'
+import Radius from './components/Widget/Radius/Radius'
+import Perf from './components/Widget/Perf/Perf'
 
 const layout = [
     {
@@ -24,18 +30,18 @@ const layout = [
         minW: 2,
         maxW: 12,
         minH: 2,
-        maxH: 12,
+        maxH: 30,
         static: false,
         widgetTitle: 'Maps 1',
         widgetVisible: true,
-        component: Maps,
+        component: MapsComp,
     },
     {
         i: "2",
         x: 0,
         y: 7,
         w: 6,
-        h: 6,
+        h: 7,
         minW: 2,
         maxW: 12,
         minH: 2,
@@ -50,7 +56,7 @@ const layout = [
         x: 7,
         y: 7,
         w: 6,
-        h: 10,
+        h: 11,
         minW: 2,
         maxW: 12,
         minH: 2,
@@ -58,16 +64,57 @@ const layout = [
         static: false,
         widgetTitle: 'Maps 3',
         widgetVisible: true,
-        component: Test,
+        component: ChartBar,
+    },
+    {
+        i: "4",
+        x: 7,
+        y: 7,
+        w: 6,
+        h: 11,
+        minW: 2,
+        maxW: 12,
+        minH: 2,
+        maxH: 12,
+        static: false,
+        widgetTitle: 'Maps 4',
+        widgetVisible: true,
+        component: Radius,
+    },
+    {
+        i: "5",
+        x: 7,
+        y: 7,
+        w: 6,
+        h: 10,
+        minW: 2,
+        maxW: 12,
+        minH: 2,
+        maxH: 12,
+        static: false,
+        widgetTitle: 'Maps 5',
+        widgetVisible: true,
+        component: Perf,
     },
 ];
 
-const Home = ({ classes, menuOpen}) => {
+const Home = ({ classes, menuOpen, computer}) => {
     const dashboardLayoutEL = useRef(null)
     const [dashboardSise, setDashboardSize] = useState(0)
     const [targetFullScreen, setTargetFullScreen] = useState(null)
-    const gridLayout = layout
 
+    const [maps, setMaps] = useState([])
+    const [performance, setPerformance] = useState([])
+    const [usage, setUsage] = useState([])
+    const [state, setState] = useState([])
+    const [male, setMale] = useState(0)
+    const [female, setFemale] = useState(0)
+    const [orther, setOrther] = useState(0)
+    
+    const gridLayout = layout
+    const categories = ['developement', 'info']
+    const stateCat = ["fulltime", "occasionnel", "disponnible", "broken to fix", "broken to recycle"]
+    
     useEffect(() => {
         if (dashboardLayoutEL && dashboardLayoutEL.current) {
             setDashboardSize(dashboardLayoutEL.current.clientWidth)
@@ -77,6 +124,39 @@ const Home = ({ classes, menuOpen}) => {
             window.removeEventListener('resize', resizeWindow)
         }
     }, [])
+
+    useEffect(() => {
+        organiseData()
+    }, [computer])
+
+    const organiseData = () => {
+        const mapData = []
+        let perfCount = 0
+        let usageValue = [0, 0]
+        let stateValue = [0, 0, 0, 0, 0]
+        let maleCount = 0
+        let femaleCount = 0
+        let ortherCount = 0
+        computer.forEach(comp => {
+            mapData.push(comp.map)
+            perfCount += comp.performance
+            const i = categories.findIndex((i) => i === comp.usage)
+            usageValue[i] = usageValue[i] + 1
+            const j = stateCat.findIndex((i) => i === comp.state)
+            stateValue[j] = stateValue[j] + 1
+            if (comp.sexe == "male") {maleCount += 1}
+            if (comp.sexe == "female") {femaleCount += 1}
+            if (comp.sexe == "orther") {ortherCount += 1}
+        })
+        console.log(maleCount, femaleCount)
+        setMale(maleCount)
+        setFemale(femaleCount)
+        setOrther(ortherCount)
+        setMaps(mapData)
+        setPerformance(perfCount/computer.length)
+        setUsage(usageValue)
+        setState(stateValue)
+    }
 
     const selectFullSize = (id) => {
         const itemSelect = gridLayout.findIndex(item => item.i === id)
@@ -115,7 +195,7 @@ const Home = ({ classes, menuOpen}) => {
                 disableFullScreen={disableFullScreen}
                 isFullScreen={isFullScreen}
             >
-                <Comp.component />
+                <Comp.component maps={maps} performance={performance} usage={usage} state={state} computer={computer} male={male} female={female} orther={orther} />
             </GriddedDiv>
         )
     }
@@ -149,4 +229,12 @@ Home.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Home);
+export default compose(
+    withTracker(props => {
+        Meteor.subscribe('allMaps');
+        return {
+            computer: Maps.find({}).fetch()
+        };
+    }),
+    withStyles(styles)
+)(Home);

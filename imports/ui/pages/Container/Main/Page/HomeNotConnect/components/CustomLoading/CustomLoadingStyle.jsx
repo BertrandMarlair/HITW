@@ -1,4 +1,4 @@
-import { dangerColor, primaryColor } from '../../style/constant'
+import { dangerColor, primaryColor } from '../../../style/constant'
 
 const CustomLoadingStyle = {
     container: {

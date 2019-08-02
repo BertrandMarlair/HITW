@@ -35,6 +35,10 @@ const styles = theme => ({
         fontWeight: 300,
         padding: 15,
         borderBottom: '1px solid lightgray',
+    }, 
+    button: {
+        margin: 'auto',
+        display: 'block',
     }
 });
 

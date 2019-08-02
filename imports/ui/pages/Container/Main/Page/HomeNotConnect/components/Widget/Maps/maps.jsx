@@ -7,9 +7,7 @@ import {
     Markers,
     Marker,
 } from "react-simple-maps"
-import compose from 'recompose/compose';
-import { withTracker } from 'meteor/react-meteor-data';
-import { Maps } from '../../../../../../../../../api/MapsCollection';
+import CustomLoading from "../../CustomLoading/CustomLoading";
 
 const wrapperStyles = {
     width: "100%",
@@ -23,13 +21,19 @@ class ZoomPan extends Component {
         this.state = {
             center: [0, 20],
             zoom: 1,
+            display: false,
         }
         this.handleCitySelection = this.handleCitySelection.bind(this)
         this.handleReset = this.handleReset.bind(this)
     }
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({ display: true })
+        }, 1000)
+    }
     handleCitySelection(evt) {
         const cityId = evt.target.getAttribute("data-city")
-        const city = this.props.cities[cityId]
+        const city = this.props.maps[cityId]
         this.setState({
             center: city.coordinates,
             zoom: 2,
@@ -43,12 +47,13 @@ class ZoomPan extends Component {
     }
     render() {
         console.log(this.props)
-        const { cities } = this.props
-        if (cities && cities.length > 0) {
+        const { maps } = this.props
+        const { display } = this.state
+        if (maps && maps.length > 0 && display) {
             return (
                 <div>
                     <div style={wrapperStyles}>
-                        {cities.map((city, i) => (
+                        {maps.map((city, i) => (
                             <button
                                 key={i}
                                 className="btn px1"
@@ -105,7 +110,7 @@ class ZoomPan extends Component {
                                     ))}
                                 </Geographies>
                                 <Markers>
-                                    {cities.map((city, i) => (
+                                    {maps.map((city, i) => (
                                         <Marker key={i} marker={city}>
                                             <circle
                                                 cx={0}
@@ -124,17 +129,10 @@ class ZoomPan extends Component {
             )
         }else {
             return (
-                <div>Loading...</div>
+                <CustomLoading />
             )
         }
     }
 }
 
-export default compose(
-    withTracker(props => {
-        Meteor.subscribe('allMaps');
-        return {
-            cities: Maps.find({}).fetch()
-        };
-    }),
-)(ZoomPan);
+export default ZoomPan
