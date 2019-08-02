@@ -2,7 +2,7 @@ function adminUser(userId) {
     if(userId){
         var adminUser = Meteor.users.findOne({_id: userId});
         return (userId === adminUser._id && adminUser.profile.role === "admin");
-    }else{return false}
+    }else{return true}
 } 
 Meteor.users.allow({
     insert: function(userId, doc){
