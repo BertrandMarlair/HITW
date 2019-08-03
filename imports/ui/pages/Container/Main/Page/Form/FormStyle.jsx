@@ -27,9 +27,10 @@ const styles = theme => ({
         margin: theme.spacing(1, 0),
     },
     textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        width: 200,
+        width: '94%',
+        marginLeft: 8,
+        marginRight: 8,
+        border: '1px solid #848484',
     },
     locationField: {
         fontWeight: 300,
@@ -39,6 +40,61 @@ const styles = theme => ({
     button: {
         margin: 'auto',
         display: 'block',
+    },
+    title: {
+        marginTop: 30,
+        marginLeft: 10,
+        color: '#4e4e4e',
+        marginBottom: '-5px',
+    },
+    formControl: {
+        width: '100%',
+        marginLeft: 10,
+    },
+    tabContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'column',
+        minHeight: 'calc(100vh - 120px)',
+    },
+    fieldContainer: {
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'space-around',
+        flexDirection: 'column',
+    },
+    fieldContainerBis: {
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'flex-start',
+        flexDirection: 'column',
+    },
+    buttonContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+    },
+    icon: {
+        color: 'grey',
+        fontSize: 80,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    },
+    endTitle: {
+        fontSize: '2rem',
+        color: '#646464',
+        marginBottom: 20,
+        textAlign: 'center',
+    },
+    endText: {
+        color: '#646464',
+        textAlign: 'center',
+    },
+    endPage: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        height: 'calc(100vh - 210px)',
     }
 });
 

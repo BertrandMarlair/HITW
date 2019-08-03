@@ -6,7 +6,7 @@ UserStatus.status.get();
 //______________________________________THEME____________________________________________
 import { MuiThemeProvider, createMuiTheme }         from '@material-ui/core/styles';
 
-let colorEditingMain   = localStorage.getItem("colorEditingMain") ? localStorage.getItem("colorEditingMain") : "#2196f3";
+let colorEditingMain = localStorage.getItem("colorEditingMain") ? localStorage.getItem("colorEditingMain") : "#0058a4";
 let colorEditingSecond = localStorage.getItem("colorEditingSecond") ? localStorage.getItem("colorEditingSecond") : "#c51162";
 
 class Container extends Component {
@@ -38,6 +38,9 @@ class Container extends Component {
                             borderRadius: 30,
                             border: 0,
                             padding: '0 30px',
+                            minHeight: 50,
+                            fontWeight: '300 !important',
+                            margin: '10px auto !important',
                         },
                     },
                     MuiPaper: {
@@ -52,7 +55,18 @@ class Container extends Component {
                             padding: '0 !important',
                             overflow: 'hidden',
                         }
-                    }
+                    },
+                    MuiInputBase: {
+                        input: {
+                            height: 34,
+                            paddingLeft: 10,
+                        }
+                    },
+                    MuiFormControlLabel: {
+                        root: {
+                            color: '#a1a1a1',
+                        },
+                    },
                 },
             }),
             light: localStorage.getItem("themeLight") == "dark" ? 'dark' : 'light',

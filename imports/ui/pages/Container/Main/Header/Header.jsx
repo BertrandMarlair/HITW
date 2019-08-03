@@ -63,6 +63,9 @@ const styles = theme => ({
     },
     buttonRigth:{
         float: "right",
+    },
+    image: {
+        width: 65,
     }
 });
 
@@ -240,11 +243,7 @@ class Header extends Component {
                             <MenuIcon />
                         </IconButton>
                 : "" }
-                <Typography variant="h6" color="inherit" className={menuOpen ? classes.flex : classes.flexOpen}>
-                    <NavLink to='/' className={classes.link}>
-                        Hack In the Wook !!
-                    </NavLink>
-                </Typography>
+                <img src="/assets/img/closethegap.png" className={classes.image} />
                 <IconButton
                     color="inherit"
                     aria-label="Switch Theme"

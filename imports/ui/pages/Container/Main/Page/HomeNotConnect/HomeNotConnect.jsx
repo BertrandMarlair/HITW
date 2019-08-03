@@ -112,7 +112,15 @@ const Home = ({ classes, menuOpen, computer}) => {
     const [orther, setOrther] = useState(0)
     
     const gridLayout = layout
-    const categories = ['developement', 'info']
+    const categories = [
+        'gender',
+        'education',
+        'innovation',
+        'digital',
+        'social',
+        'migration',
+        'healthcare',
+    ]
     const stateCat = ["fulltime", "occasionnel", "disponnible", "broken to fix", "broken to recycle"]
     
     useEffect(() => {
@@ -132,7 +140,7 @@ const Home = ({ classes, menuOpen, computer}) => {
     const organiseData = () => {
         const mapData = []
         let perfCount = 0
-        let usageValue = [0, 0]
+        let usageValue = [0, 0, 0, 0, 0, 0]
         let stateValue = [0, 0, 0, 0, 0]
         let maleCount = 0
         let femaleCount = 0

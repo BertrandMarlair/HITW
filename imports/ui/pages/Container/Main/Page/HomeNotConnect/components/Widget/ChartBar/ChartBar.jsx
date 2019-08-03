@@ -29,7 +29,15 @@ class BarChart extends React.Component {
                     enabled: false,
                 },
                 xaxis: {
-                    categories: ['developement', 'info'],
+                    categories: [
+                        'gender',
+                        'education',
+                        'innovation',
+                        'digital',
+                        'social',
+                        'migration',
+                        'healthcare',
+                    ],
                     labels: {
                         style: {
                             colors: colors,

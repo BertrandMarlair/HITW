@@ -39,6 +39,7 @@ const styles = theme => ({
     minHeight: "100vh",
   },
   appBar: {
+    background: 'white',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
@@ -97,7 +98,7 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: 'white',
     width: "100%",
   },
   a: {
@@ -276,6 +277,7 @@ class ResponsiveDrawer extends React.Component {
                   <Route exact path='/' render={(props) => <HomeNotConnect menuOpen={open} {...props} />} />
                   <Route exact path='/home' render={(props) => <Home menuOpen={open} {...props} />} />
                   <Route exact path='/form' render={(props) => <Form menuOpen={open} {...props} />} />
+                  <Route exact path='/form/:id' render={(props) => <Form menuOpen={open} {...props} />} />
                   <Route exact path='/connect' render={(props) => <Connection menuOpen={open} {...props} />} />
                   <Route exact path='/logout' render={(props) => <Logout menuOpen={open} {...props} />} />
                 </Switch>
