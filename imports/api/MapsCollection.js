@@ -10,6 +10,9 @@ if (Meteor.isServer) {
     });
 
     Meteor.methods({
+        'computer.add'(comp) {
+            Maps.insert(comp);
+        }
         // 'maps.insert'(title) {
         //     check(title, String);
         //     Maps.insert({

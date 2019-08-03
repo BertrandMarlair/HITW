@@ -12,16 +12,32 @@ import FormLabel from '@material-ui/core/FormLabel';
 import TextField from '@material-ui/core/TextField';
 import PerformChart from './components/performChart';
 import Button from '@material-ui/core/Button';
+import { Meteor } from 'meteor/meteor';
 
 const Form = ({ classes, menuOpen }) => {
     const [value, setValue] = useState('1');
     const [address, setAddress] = useState('');
     const [performValue, setPerformValue] = useState(0);
+    const [Latlng, setLatLng] = useState({});
     const [test, setTest] = useState(0);
+    const [name, setName] = useState('');
+    const [sexe, setSexe] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [age, setAge] = useState('');
+    const [usage, setUsage] = useState('');
+    const [state, setState] = useState('');
+
     const maxPerformValue = 1000;
 
-    const handleChange = (event) => {
-        setValue(event.target.value);
+    const handleChangeUsage = (event) => {
+        setUsage(event.target.value);
+    }
+    const handleChangeState = (event) => {
+        setState(event.target.value);
+    }
+
+    const handleChangeSexe = (event) => {
+        setSexe(event.target.value);
     }
 
     const performTest = () => {
@@ -51,8 +67,31 @@ const Form = ({ classes, menuOpen }) => {
                 console.log(results)
                 return getLatLng(results[0])
             })
-            .then(latLng => console.log('Success', latLng))
+            .then(latLng => {setLatLng(latLng); console.log('Success', latLng)})
             .catch(error => console.error('Error', error));
+    }
+
+    const handlesubmit = () => {
+        const computer = {
+            map: {
+                name: address,
+                coordinates: [
+                    Latlng.lng,
+                    Latlng.lat,
+                ]
+            },
+            name,
+            lastname,
+            age,
+            sexe,
+            usage,
+            state,
+            performance: performValue
+        }
+        console.log(computer)
+        Meteor.call('computer.add', computer, (err) => {
+            console.log(err)
+        })
     }
 
     return (
@@ -105,16 +144,19 @@ const Form = ({ classes, menuOpen }) => {
                     label="name"
                     className={classes.textField}
                     margin="normal"
+                    onChange={(e) => setName(e.target.value)}
                 />
                 <TextField
                     label="lastname"
                     className={classes.textField}
                     margin="normal"
+                    onChange={(e) => setLastname(e.target.value)}
                 />
                 <TextField
                     label="age"
                     className={classes.textField}
                     margin="normal"
+                    onChange={(e) => setAge(e.target.value)}
                 />
                 <FormControl component="fieldset" className={classes.formControl}>
                     <FormLabel component="legend">Sexe</FormLabel>
@@ -122,8 +164,8 @@ const Form = ({ classes, menuOpen }) => {
                         aria-label="gender"
                         name="gender1"
                         className={classes.group}
-                        value={value}
-                        onChange={handleChange}
+                        value={sexe}
+                        onChange={handleChangeSexe}
                     >
                         <FormControlLabel value="female" control={<Radio />} label="Female" />
                         <FormControlLabel value="male" control={<Radio />} label="Male" />
@@ -136,8 +178,8 @@ const Form = ({ classes, menuOpen }) => {
                         aria-label="usage"
                         name="usage1"
                         className={classes.group}
-                        value={value}
-                        onChange={handleChange}
+                        value={usage}
+                        onChange={handleChangeUsage}
                     >
                         <FormControlLabel value="developement" control={<Radio />} label="Developement" />
                         <FormControlLabel value="info" control={<Radio />} label="Info" />
@@ -149,13 +191,13 @@ const Form = ({ classes, menuOpen }) => {
                         aria-label="state"
                         name="state1"
                         className={classes.group}
-                        value={value}
-                        onChange={handleChange}
+                        value={state}
+                        onChange={handleChangeState}
                     >
                         <FormControlLabel value="fulltime" control={<Radio />} label="FullTime" />
                         <FormControlLabel value="occasionnel" control={<Radio />} label="Occasionnel" />
                         <FormControlLabel value="disponible" control={<Radio />} label="Disponible" />
-                        <FormControlLabel value="broken to fix" control={<Radio />} label="broken to fix" />
+                        <FormControlLabel value="broken to fix" control={<Radio />} label="Broken to fix" />
                         <FormControlLabel value="broken to recycle" control={<Radio />} label="Broken to reclyce" />
                     </RadioGroup>
                 </FormControl>
@@ -165,6 +207,9 @@ const Form = ({ classes, menuOpen }) => {
                         Run perf test
                     </Button>
                 </div>
+                <Button onClick={() => handlesubmit()} variant="contained" color="primary" className={classes.button}>
+                    Submit
+                </Button>
             </div>
         </div>
     )
