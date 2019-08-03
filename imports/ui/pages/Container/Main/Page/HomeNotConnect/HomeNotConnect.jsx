@@ -32,7 +32,7 @@ const layout = [
         minH: 2,
         maxH: 30,
         static: false,
-        widgetTitle: 'Maps 1',
+        widgetTitle: 'Maps',
         widgetVisible: true,
         component: MapsComp,
     },
@@ -47,7 +47,7 @@ const layout = [
         minH: 2,
         maxH: 12,
         static: false,
-        widgetTitle: 'Maps 2',
+        widgetTitle: 'Users informations',
         widgetVisible: true,
         component: Chart,
     },
@@ -62,7 +62,7 @@ const layout = [
         minH: 2,
         maxH: 12,
         static: false,
-        widgetTitle: 'Maps 3',
+        widgetTitle: 'Usage Type',
         widgetVisible: true,
         component: ChartBar,
     },
@@ -77,7 +77,7 @@ const layout = [
         minH: 2,
         maxH: 12,
         static: false,
-        widgetTitle: 'Maps 4',
+        widgetTitle: 'Status of computers',
         widgetVisible: true,
         component: Radius,
     },
@@ -92,7 +92,7 @@ const layout = [
         minH: 2,
         maxH: 12,
         static: false,
-        widgetTitle: 'Maps 5',
+        widgetTitle: 'Average performance',
         widgetVisible: true,
         component: Perf,
     },
@@ -116,12 +116,12 @@ const Home = ({ classes, menuOpen, computer}) => {
         'gender',
         'education',
         'innovation',
-        'digital',
+        'digital skills',
         'social',
         'migration',
         'healthcare',
     ]
-    const stateCat = ["fulltime", "occasionnel", "disponnible", "broken to fix", "broken to recycle"]
+    const stateCat = ["fulltime", "occasionnel", "disponible", "broken to fix", "broken to recycle"]
     
     useEffect(() => {
         if (dashboardLayoutEL && dashboardLayoutEL.current) {
@@ -203,7 +203,7 @@ const Home = ({ classes, menuOpen, computer}) => {
                 disableFullScreen={disableFullScreen}
                 isFullScreen={isFullScreen}
             >
-                <Comp.component maps={maps} performance={performance} usage={usage} state={state} computer={computer} male={male} female={female} orther={orther} />
+                <Comp.component maps={maps} performance={performance} usage={usage} state={state} computer={computer} male={male} female={female} orther={orther} fullscreen={isFullScreen} />
             </GriddedDiv>
         )
     }
@@ -216,19 +216,17 @@ const Home = ({ classes, menuOpen, computer}) => {
     }
 
     return (
-        <div className={!menuOpen ? classes.flex : classes.flexOpen}>
-            <div ref={dashboardLayoutEL} className={classes.gridContainer}>
-                <GridLayout
-                    className="layout"
-                    cols={12}
-                    rowHeight={30}
-                    width={dashboardSise}
-                    layout={targetLayout()}
-                    draggableHandle={'nav, nav *'}
-                >
-                    {renderGrid()}
-                </GridLayout>
-            </div>
+        <div ref={dashboardLayoutEL} className={classes.gridContainer}>
+            <GridLayout
+                className="layout"
+                cols={12}
+                rowHeight={30}
+                width={dashboardSise}
+                layout={targetLayout()}
+                draggableHandle={'nav, nav *'}
+            >
+                {renderGrid()}
+            </GridLayout>
         </div>
     )
 }

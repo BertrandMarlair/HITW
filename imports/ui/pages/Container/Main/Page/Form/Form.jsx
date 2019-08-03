@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './FormStyle'
 import { withStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
@@ -33,6 +33,10 @@ const Form = ({ classes, menuOpen }) => {
     const [state, setState] = useState('');
 
     const maxPerformValue = 1000;
+
+    useEffect(() => {
+        window.scrollTo({top: 0, behavior: 'smooth'})
+    }, [value])
 
     const theme = useTheme();
 
@@ -105,7 +109,7 @@ const Form = ({ classes, menuOpen }) => {
             if(err){
                 console.log(err)
             } else {
-                setValue(4)
+                setValue(5)
             }
         })
     }
@@ -121,6 +125,7 @@ const Form = ({ classes, menuOpen }) => {
                     <TabPanel value={value} index={0} dir={theme.direction}>
                         <div className={classes.tabContainer}>
                             <div className={classes.fieldContainerBis}>
+                                <div className={classes.bigtitle}>Location state</div>
                                 <Icon className={classes.icon}>location_on</Icon>
                                 <PlacesAutocomplete
                                     value={address}
@@ -178,6 +183,7 @@ const Form = ({ classes, menuOpen }) => {
                     <TabPanel value={value} index={1} dir={theme.direction}>
                         <div className={classes.tabContainer}>
                             <div className={classes.fieldContainer}>
+                                <div className={classes.bigtitle}>User Informations</div>
                                 <div className={classes.title}>Name</div>
                                 <TextField
                                     placeholder="Name"
@@ -232,7 +238,8 @@ const Form = ({ classes, menuOpen }) => {
                     <TabPanel value={value} index={2} dir={theme.direction}>
                         <div className={classes.tabContainer}>
                             <div className={classes.fieldContainer}>
-                                <div className={classes.title}>Usage</div>
+                                <div className={classes.bigtitle}>Utilisation status</div>
+                                <div className={classes.title}>Activity type</div>
                                 <FormControl component="fieldset" className={classes.formControl}>
                                     <RadioGroup
                                         aria-label="usage"
@@ -250,22 +257,6 @@ const Form = ({ classes, menuOpen }) => {
                                         <FormControlLabel value="healthcare" control={<Radio color="primary"/>} label="Healthcare" />
                                     </RadioGroup>
                                 </FormControl>
-                                <div className={classes.title}>State</div>
-                                <FormControl component="fieldset" className={classes.formControl}>
-                                    <RadioGroup
-                                        aria-label="state"
-                                        name="state1"
-                                        className={classes.group}
-                                        value={state}
-                                        onChange={handleChangeState}
-                                    >
-                                        <FormControlLabel value="fulltime" control={<Radio color="primary"/>} label="FullTime" />
-                                        <FormControlLabel value="occasionnel" control={<Radio color="primary"/>} label="Occasionnel" />
-                                        <FormControlLabel value="disponible" control={<Radio color="primary"/>} label="Disponible" />
-                                        <FormControlLabel value="broken to fix" control={<Radio color="primary"/>} label="Broken to fix" />
-                                        <FormControlLabel value="broken to recycle" control={<Radio color="primary"/>} label="Broken to reclyce" />
-                                    </RadioGroup>
-                                </FormControl>
                             </div>
                             <div className={classes.buttonContainer}>
                                 <Button variant="contained" color="primary" className={classes.button}  onClick={() => setValue(1)}>prev</Button>
@@ -276,6 +267,33 @@ const Form = ({ classes, menuOpen }) => {
                     <TabPanel value={value} index={3} dir={theme.direction}>
                         <div className={classes.tabContainer}>
                             <div className={classes.fieldContainer}>
+                                <div className={classes.bigtitle}>Utilisation state</div>
+                                <div className={classes.title}>State</div>
+                                <FormControl component="fieldset" className={classes.formControl}>
+                                    <RadioGroup
+                                        aria-label="state"
+                                        name="state1"
+                                        className={classes.group}
+                                        value={state}
+                                        onChange={handleChangeState}
+                                    >
+                                        <FormControlLabel value="fulltime" control={<Radio color="primary" />} label="FullTime" />
+                                        <FormControlLabel value="occasionnel" control={<Radio color="primary" />} label="Occasionnel" />
+                                        <FormControlLabel value="disponible" control={<Radio color="primary" />} label="Disponible" />
+                                        <FormControlLabel value="broken to fix" control={<Radio color="primary" />} label="Broken to fix" />
+                                        <FormControlLabel value="broken to recycle" control={<Radio color="primary" />} label="Broken to reclyce" />
+                                    </RadioGroup>
+                                </FormControl>
+                            </div>
+                            <div className={classes.buttonContainer}>
+                                <Button variant="contained" color="primary" className={classes.button} onClick={() => setValue(2)}>prev</Button>
+                                <Button variant="contained" color="primary" className={classes.button} onClick={() => setValue(4)}>Finish</Button>
+                            </div>
+                        </div>
+                    </TabPanel>
+                    <TabPanel value={value} index={4} dir={theme.direction}>
+                        <div className={classes.tabContainer}>
+                            <div className={classes.fieldContainer}>
                                 <div>
                                     <PerformChart value={performValue} />
                                     <Button onClick={() => perform()} variant="contained" color="primary" className={classes.button} disabled={test !== 0}>
@@ -284,14 +302,14 @@ const Form = ({ classes, menuOpen }) => {
                                 </div>
                             </div>
                             <div className={classes.buttonContainer}>
-                                <Button variant="contained" color="primary" className={classes.button} onClick={() => setValue(2)}>prev</Button>
+                                <Button variant="contained" color="primary" className={classes.button} onClick={() => setValue(3)}>prev</Button>
                                 <Button variant="contained" color="primary" className={classes.button} onClick={() => handlesubmit()}>
                                     Submit
                                 </Button>
                             </div>
                         </div>
                     </TabPanel>
-                    <TabPanel value={value} index={4} dir={theme.direction}>
+                    <TabPanel value={value} index={5} dir={theme.direction}>
                         <div className={classes.tabContainer}>
                             <div className={classes.fieldContainer}>
                                 <div className={classes.endPage}>

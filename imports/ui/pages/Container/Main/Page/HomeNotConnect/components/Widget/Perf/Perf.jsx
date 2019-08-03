@@ -42,7 +42,7 @@ class RadialChart extends React.Component {
                 stroke: {
                     dashArray: 4
                 },
-                labels: ['Median Ratio']
+                labels: ['Perf. Ratio']
             },
             display: false
         }
@@ -58,7 +58,7 @@ class RadialChart extends React.Component {
         return (
             <div id="chart">
                 {this.state.display ? (
-                    <Chart options={this.state.options} series={[this.props.performance]} type="radialBar" height="350" />
+                    <Chart options={this.state.options} series={[Math.round(this.props.performance)]} type="radialBar" height="350" />
                 ) : (
                     <CustomLoading />
                 )}

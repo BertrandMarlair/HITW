@@ -26,6 +26,10 @@ const styles = theme => ({
     group: {
         margin: theme.spacing(1, 0),
     },
+    container: {
+        maxWidth: 400,
+        margin: 'auto',
+    },
     textField: {
         width: '94%',
         marginLeft: 8,
@@ -55,7 +59,7 @@ const styles = theme => ({
         display: 'flex',
         justifyContent: 'space-between',
         flexDirection: 'column',
-        minHeight: 'calc(100vh - 120px)',
+        minHeight: 'calc(80vh - 120px)',
     },
     fieldContainer: {
         height: '100%',
@@ -94,7 +98,13 @@ const styles = theme => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        height: 'calc(100vh - 210px)',
+        height: 'calc(80vh - 210px)',
+    },
+    bigtitle: {
+        fontSize: '2rem',
+        color: '#5c5c5c',
+        marginLeft: 20,
+        marginBottom: 20,
     }
 });
 

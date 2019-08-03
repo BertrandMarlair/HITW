@@ -50,7 +50,6 @@ const styles = theme => ({
         marginLeft: theme.spacing(1),
     },
     gridContainer: {
-        maxWidth: 1400,
         margin: 'auto',
     }
 });

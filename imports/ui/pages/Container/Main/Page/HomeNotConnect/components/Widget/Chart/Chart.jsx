@@ -2,6 +2,7 @@ import React from 'react'
 import { withStyles } from '@material-ui/core'
 import ChartStyle from './ChartStyle'
 import Chart from 'react-apexcharts'
+import Table from './Table'
 
 class BarChart extends React.Component {
 
@@ -56,7 +57,7 @@ class BarChart extends React.Component {
                 </div>
                 {this.props.fullscreen && (
                     <div>
-                        orther things
+                        <Table users={this.props.computer} />
                     </div>
                 )}
             </div>

@@ -52,7 +52,7 @@ class ZoomPan extends Component {
         if (maps && maps.length > 0 && display) {
             return (
                 <div>
-                    <div style={wrapperStyles}>
+                    {/* <div style={wrapperStyles}>
                         {maps.map((city, i) => (
                             <button
                                 key={i}
@@ -66,7 +66,7 @@ class ZoomPan extends Component {
                         <button onClick={this.handleReset}>
                             {"Reset"}
                         </button>
-                    </div>
+                    </div> */}
                     <div style={wrapperStyles}>
                         <ComposableMap
                             projectionConfig={{
