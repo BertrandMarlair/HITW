@@ -17,7 +17,7 @@
     "@sentry/node": "^5.5.0",
     "@synapsestudios/react-drop-n-crop": "^0.2.0",
     "apexcharts": "^3.8.3",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "babel-core": "^6.26.3",
     "babel-polyfill": "^6.26.0",
     "bcrypt": "^3.0.6",
