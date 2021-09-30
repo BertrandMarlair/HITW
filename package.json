@@ -26,7 +26,7 @@
     "chroma-js": "^2.0.4",
     "classnames": "^2.2.6",
     "firebase": "^6.3.4",
-    "handsontable": "^7.1.0",
+    "handsontable": "^10.0.0",
     "history": "^4.9.0",
     "install": "^0.13.0",
     "meteor-node-stubs": "^0.4.1",
